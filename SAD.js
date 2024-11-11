@@ -45,3 +45,24 @@ function emitRadioWave(enemyPosition) {
     });
     return signals;
 }
+function guessEnemyPosition(playerGuess) {
+    let hits = 0;
+    enemies.forEach((enemy, index) => {
+        if (playerGuess.x === enemy.x && playerGuess.y === enemy.y) {
+            hits++;
+            // Remove the enemy from the map after a hit
+            enemies.splice(index, 1);
+        }
+    });
+    return hits;
+}
+// Display game status
+function gameStatus() {
+    console.log(`Turn ${turns}:`);
+    console.log(`Katyusha barrages remaining: ${ammo}`);
+    console.log("Nazis remaining:", enemies.length);
+    if (enemies.length === 0) {
+        console.log("You've destroyed all enemies of the Motherland, we won! For now...");
+        gameWon = true;
+    }
+}
